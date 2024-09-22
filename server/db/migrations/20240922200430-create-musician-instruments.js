@@ -10,10 +10,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       musicianId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Musicians',
+          key: 'id'
+        },
+        onDelete: 'cascade'
       },
       instrumentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Instruments',
+          key: 'id'
+        },
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

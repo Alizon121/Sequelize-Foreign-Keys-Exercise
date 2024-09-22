@@ -10,7 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Your code here 
+      Instrument.belongsToMany(
+        models.Musician,
+        {
+          through: models.MusicianInstruments,
+          foreignKey: 'instrumentId',
+          otherKey: 'musicianId'
+        }
+      )
     }
   };
   Instrument.init({
@@ -18,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+    musicianId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
